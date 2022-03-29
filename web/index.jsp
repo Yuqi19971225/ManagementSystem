@@ -16,7 +16,10 @@
 <h1>首页</h1>
 <h2>欢迎你，
     <%
-        User user = (User) request.getAttribute("loginUser")
+        User user = (User) request.getAttribute("loginUser");
+        if (user != null) {
+            out.write("<h2>" + user.getUsername() + "</h2>");
+        }
     %>
 </h2>
 </body>

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="javax.jws.soap.SOAPBinding" %>
+<%@ page import="com.qf.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: Administrator1
   Date: 2022/3/13
@@ -8,14 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>登录</title>
+    <meta charset="UTF-8">
+    <title>首页</title>
 </head>
 <body>
-<form action="/login" method="post">
-  用户名：<input type="text" name="username"><br>
-  密码：<input type="password" name="password"><br>
-  <input type="submit" value="登录">
-</form>
+<h1>首页</h1>
+<h2>欢迎你，
+    <%
+        User user = (User) request.getAttribute("loginUser");
+        if (user != null) {
+            out.write("<h2>" + user + "</h2>");
+        }
+    %>
+</h2>
 </body>
 </html>

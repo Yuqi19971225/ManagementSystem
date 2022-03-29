@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(User user) {
-        return usesDAO.selectUserByUsernameAndPassword(user);
+        try {
+            return usesDAO.selectUserByUsernameAndPassword(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -52,6 +52,13 @@
             <td></td>
         </tr>
         <tr>
+            <td>验证码:</td>
+            <td>
+                <input type="text" name="checkCode"/>
+                <img src="/CheckCodeServlet" alt="验证码加载失败">
+            </td>
+            <td></td>
+        </tr>
         <tr>
             <td></td>
             <td><input type="checkbox" name="rememberMe"/>记住我</td>

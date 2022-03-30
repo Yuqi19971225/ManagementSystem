@@ -18,12 +18,54 @@
         out.write("<h1>" + obj + "</h1>");
     }
 %>
+<%--获得记住的cookie中用户信息--%>
+<%
+    Cookie[] cookies = request.getCookies();
+    String username = "";
+    String password = "";
+    //遍历cookie
+    for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("username")) {
+            username = cookie.getValue();
+        }
+        if (cookie.getName().equals(("password"))) {
+            password = cookie.getValue();
+        }
+    }
 
-<form action="/LoginServlet" method="post">
-    用户名：<input type="text" name="username"><br>
-    密码：<input type="password" name="password"><br>
-    <input type="submit" value="登录">
-    <input type="reset" value="重置"/>
+%>
+<form method="post" action="/LoginServlet">
+    <table>
+        <tr>
+            <td></td>
+            <td>登录页面</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>用户名:</td>
+            <td><input type="text" name="username" id="username" value="<%=username%>"/></td>
+            <td id="uname1"></td>
+        </tr>
+        <tr>
+            <td>密码:</td>
+            <td><input type="password" name="password" id="password" value="<%=password%>"/></td>
+            <td></td>
+        </tr>
+        <tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox" name="rememberMe"/>记住我</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="提交"/>
+                <input type="reset" value="重置"/>
+            </td>
+            <td></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>

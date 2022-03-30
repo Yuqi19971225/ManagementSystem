@@ -18,7 +18,7 @@
     <%
         User user = (User) request.getAttribute("loginUser");
         if (user != null) {
-            out.write("<h2>" + user + "</h2>");
+            out.write("<h2>" + user.getUsername() + "</h2>");
         }
     %>
 </h2>

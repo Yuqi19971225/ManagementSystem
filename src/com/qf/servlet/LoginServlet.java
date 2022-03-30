@@ -19,12 +19,27 @@ public class LoginServlet extends HttpServlet {
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
         System.out.println("用户登录信息" + user);
-        //调用业务处理并得到结果
+        //接受记住我，多选框如果没有value属性，那么没有选中得到的结果为null,选中得到的是on
+        String rememberMe = request.getParameter("rememberMe");
+        System.out.println("记住我：" + rememberMe);
+        //2.调用业务处理并得到结果
         UserService userService = new UserServiceImpl();
         User res = userService.login(user);
         //3.响应
         if (res != null) {
             //登录成功，进首页
+            //记住我功能
+            if ("on".equals(rememberMe)) {
+                //创建cookie对象存用户名密码
+                Cookie cookie1 = new Cookie("username", user.getUsername());
+                Cookie cookie2 = new Cookie("password", user.getPassword());
+                //设置cookie有效期
+                cookie1.setMaxAge(60);
+                cookie2.setMaxAge(60);
+                //用响应对象将cookie对象通过浏览器存在客户端
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
+            }
             request.setAttribute("loginUser", res);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {

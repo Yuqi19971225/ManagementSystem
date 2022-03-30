@@ -10,6 +10,14 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
+    <script type="text/javascript">
+        function noLook() {
+            //验证码图片是内存图片，第一次请求生成验证码时，验证码图片会保存在内存中
+            //要想要新的图片，需要新的url
+            document.getElementById("img1").src = "/CheckCodeServlet?r=" + new Date();
+
+        }
+    </script>
 </head>
 <body>
 <%
@@ -55,7 +63,8 @@
             <td>验证码:</td>
             <td>
                 <input type="text" name="checkCode"/>
-                <img src="/CheckCodeServlet" alt="验证码加载失败">
+                <img id="img1" src="/CheckCodeServlet" alt="验证码加载失败" onclick="noLook()"/>
+                <a onclick="noLook()"/>看不清，刷新验证码</a>
             </td>
             <td></td>
         </tr>

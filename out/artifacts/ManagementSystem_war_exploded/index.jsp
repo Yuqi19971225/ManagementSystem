@@ -1,5 +1,5 @@
 <%@ page import="javax.jws.soap.SOAPBinding" %>
-<%@ page import="com.qf.entity.User" %><%--
+<%@ page import="com.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: Administrator1
   Date: 2022/3/13

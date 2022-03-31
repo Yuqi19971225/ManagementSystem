@@ -2,12 +2,16 @@ package com.DAO.impl;
 
 import com.DAO.UsersDAO;
 import com.dbutils.DBUtils;
+import com.dbutils.PageUtils;
 import com.entity.User;
 import com.vo.LoginVo;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class UsersDAOImpl implements UsersDAO {
     QueryRunner qr = new QueryRunner(DBUtils.dataSource);
@@ -24,5 +28,19 @@ public class UsersDAOImpl implements UsersDAO {
         String sql = "select username,password,age,gender,hobbits,city,birthday from Users where username=? and password=?";
         User result = qr.query(sql, new BeanHandler<>(User.class), user.getUsername(), user.getPassword());
         return result;
+    }
+
+    @Override
+    public Integer selectAllCount() throws SQLException {
+        String sql = "select count(id) from Users ";
+        long result = qr.query(sql, new ScalarHandler<Long>());
+        return (int) result;
+    }
+
+    @Override
+    public List<User> selectUserByPage(PageUtils pageUtils) throws SQLException {
+        String sql = "select id,username,password,age,gender,hobbits,city,birthday from Users limit ?,?";
+        List<User> users = qr.query(sql, new BeanListHandler<User>(User.class), pageUtils.getStart(), pageUtils.getPageCount());
+        return users;
     }
 }

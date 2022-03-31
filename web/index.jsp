@@ -29,7 +29,7 @@
         <h2>
             <a>退出</a>
             <a>修改密码</a>
-            <a>管理普通用户信息</a>
+            <a href="SelectUsersByPageServlet?cur=1">管理普通用户信息</a>
         </h2>
 
     </c:when>

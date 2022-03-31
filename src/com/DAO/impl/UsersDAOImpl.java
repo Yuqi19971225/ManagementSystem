@@ -3,6 +3,7 @@ package com.DAO.impl;
 import com.DAO.UsersDAO;
 import com.dbutils.DBUtils;
 import com.entity.User;
+import com.vo.LoginVo;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
@@ -19,7 +20,7 @@ public class UsersDAOImpl implements UsersDAO {
     }
 
     @Override
-    public User selectUserByUsernameAndPassword(User user) throws SQLException {
+    public User selectUserByUsernameAndPassword(LoginVo user) throws SQLException {
         String sql = "select username,password,age,gender,hobbits,city,birthday from Users where username=? and password=?";
         User result = qr.query(sql, new BeanHandler<>(User.class), user.getUsername(), user.getPassword());
         return result;

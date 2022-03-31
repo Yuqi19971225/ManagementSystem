@@ -4,6 +4,7 @@ import com.DAO.UsersDAO;
 import com.DAO.impl.UsersDAOImpl;
 import com.entity.User;
 import com.service.UserService;
+import com.vo.LoginVo;
 
 import java.sql.SQLException;
 
@@ -22,12 +23,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(User user) {
+    public boolean login(LoginVo user) {
+
+        User user1 = null;
         try {
-            return usesDAO.selectUserByUsernameAndPassword(user);
+            user1 = usesDAO.selectUserByUsernameAndPassword(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+
+        if (user1 == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

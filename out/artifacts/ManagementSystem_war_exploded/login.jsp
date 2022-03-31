@@ -60,6 +60,14 @@
             <td></td>
         </tr>
         <tr>
+            <td>身份:</td>
+            <td>
+                <input type="radio" name="role" value="student" checked="checked"/>普通用户
+                <input type="radio" name="role" value="admin"/>管理员
+            </td>
+            <td></td>
+        </tr>
+        <tr>
             <td>验证码:</td>
             <td>
                 <input type="text" name="checkCode"/>
